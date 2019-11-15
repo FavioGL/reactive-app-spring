@@ -29,6 +29,7 @@ public class SampleHandlerFunctionTest {
                 .getResponseBody();
         StepVerifier.create(integerFlux).expectSubscription().expectNext(1,2,3,4,5,6).verifyComplete();
     }
+    //test
     @Test
     public void monoTest(){
         testClient.get().uri("/functional/mono")
