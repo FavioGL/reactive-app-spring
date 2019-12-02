@@ -15,6 +15,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import java.util.Arrays;
@@ -83,6 +84,18 @@ public class ItemControllerTest {
                 .expectStatus().isOk()
                 .expectBody()
                 .jsonPath("$.price",1378.32);
+
+    }
+    @Test
+    public void saveOneItem(){
+        Item item = new Item(null, "item 10",928.2);
+        webTestClient.post().uri(ItemConstants.LOAD_ONE_ITEM_V1)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(Mono.just(item), Item.class)
+                .exchange()
+                .expectStatus().isCreated()
+                .expectBody()
+                .jsonPath("$.price",928.2).isNotEmpty();
 
     }
 
