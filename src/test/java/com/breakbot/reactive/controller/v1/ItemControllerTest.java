@@ -99,5 +99,18 @@ public class ItemControllerTest {
 
     }
 
+    @Test
+    public void updateItem(){
+        double newPrice = 938.93;
+        String newDescription = "item desc X";
+        Item item = new Item(null,newDescription,newPrice);
+        webTestClient.put().uri(ItemConstants.UPDATE_ONE_ITEM_V1.concat("/{id}"),"2")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(Mono.just(item), Item.class)
+                .exchange().expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$.price",5);
+    }
+
 
 }

@@ -50,6 +50,17 @@ public class ItemController {
         return stringMono;
     }
 
+    @PutMapping(ItemConstants.UPDATE_ONE_ITEM_V1+ "/{id}")
+    public Mono<ResponseEntity<Item>> updateItem(@PathVariable String id, @RequestBody Item item){
+        return itemReactorRepository.findById(id).flatMap(currItem -> {
+            currItem.setPrice(item.getPrice());
+            currItem.setDescription(item.getDescription());
+            return itemReactorRepository.save(currItem);
+        })
+                .map(updItem -> new ResponseEntity<>(updItem, HttpStatus.OK))
+                .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
     public void setup() {
         this.itemReactorRepository.deleteAll()
                 .thenMany(Flux.fromIterable(itemList))
