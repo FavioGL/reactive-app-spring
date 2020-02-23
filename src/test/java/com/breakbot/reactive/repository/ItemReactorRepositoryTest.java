@@ -39,7 +39,7 @@ public class ItemReactorRepositoryTest {
     public void getAllElements(){
         Flux<Item> itemFlux = itemReactorRepository.findAll();
         StepVerifier.create(itemFlux).expectSubscription()
-                .expectNextCount(3).verifyComplete();
+                .expectNextCount(4).verifyComplete();
     }
 
     @Test
@@ -82,6 +82,18 @@ public class ItemReactorRepositoryTest {
                 .map(Item::getId)
                 .flatMap( id-> {
                     return itemReactorRepository.deleteById(id);
+                });
+
+        StepVerifier.create(itemMono.log() ).expectSubscription()
+                .verifyComplete();
+    }
+    @Test
+    public void deleteItemB(){
+        Mono<Void> itemMono = itemReactorRepository
+                .findByDescription("This is item 1")
+                //.map(Item::getId)
+                .flatMap( item-> {
+                    return itemReactorRepository.deleteById(item.getId());
                 });
 
         StepVerifier.create(itemMono.log() ).expectSubscription()
