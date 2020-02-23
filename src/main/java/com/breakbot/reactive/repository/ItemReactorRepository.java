@@ -7,4 +7,5 @@ import reactor.core.publisher.Mono;
 
 public interface ItemReactorRepository extends ReactiveMongoRepository<Item,String> {
     Mono<Item> findByDescription(String description);
+
 }

@@ -112,5 +112,14 @@ public class ItemControllerTest {
                 .jsonPath("$.price",5);
     }
 
+    @Test
+    public void deleteItem(){
+        webTestClient.delete().uri(ItemConstants.UPDATE_ONE_ITEM_V1.concat("/{id}"),"3")
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(Void.class);
+
+    }
 
 }

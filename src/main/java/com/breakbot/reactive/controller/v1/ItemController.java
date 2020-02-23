@@ -50,6 +50,11 @@ public class ItemController {
         return stringMono;
     }
 
+    @DeleteMapping(ItemConstants.LOAD_ONE_ITEM_V1+"/{id}")
+    public Mono<Void> deleteItem(@PathVariable String id){
+        return itemReactorRepository.deleteById(id);
+    }
+
     @PutMapping(ItemConstants.UPDATE_ONE_ITEM_V1+ "/{id}")
     public Mono<ResponseEntity<Item>> updateItem(@PathVariable String id, @RequestBody Item item){
         return itemReactorRepository.findById(id).flatMap(currItem -> {
