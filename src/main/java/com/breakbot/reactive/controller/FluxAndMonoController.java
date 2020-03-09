@@ -13,7 +13,7 @@ import java.time.Duration;
 public class FluxAndMonoController {
     @GetMapping(value = "/flux", produces = MediaType.APPLICATION_JSON_VALUE)
     public Flux<Integer> returnFlux(){
-        return Flux.just(1,2,3,4,5,6).delayElements(Duration.ofMillis(250)).log();
+        return Flux.just(1,2,3,4,5,6).delayElements(Duration.ofMillis(2500)).log();
     }
     @GetMapping(value = "/mono", produces = MediaType.APPLICATION_JSON_VALUE)
     public Mono<Integer> returnMono(){

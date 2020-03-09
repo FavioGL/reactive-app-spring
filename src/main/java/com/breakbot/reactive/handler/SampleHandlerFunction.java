@@ -24,4 +24,7 @@ public class SampleHandlerFunction {
                         Flux.just(1,2,3,4,5,6).log(),Integer.class
                 );
     }
+   /* public Flux<ServerResponse> getAllItems(ServerRequest serverRequest){
+        
+    }*/
 }

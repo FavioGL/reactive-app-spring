@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
 @RestController
 @Slf4j
 public class ItemController {
+
+
 
     @Autowired
     ItemReactorRepository itemReactorRepository;
@@ -29,7 +32,7 @@ public class ItemController {
 
     @GetMapping(ItemConstants.ITEM_END_POINT_V1)
     public Flux<Item> getAllItems(){
-        return itemReactorRepository.findAll();
+        return itemReactorRepository.findAll().delayElements(Duration.ofSeconds(3));
     }
 
     @GetMapping(ItemConstants.LOAD_ONE_ITEM_V1+"/{id}")
@@ -41,6 +44,12 @@ public class ItemController {
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<Item> createItem(@RequestBody Item item){
         return itemReactorRepository.save(item);
+    }
+
+    @GetMapping(ItemConstants.RUNTIME_EXCEPTION)
+    public Flux<Item> getError(){
+        return itemReactorRepository.findAll()
+                .concatWith(Mono.error((new RuntimeException("this is an expcetion!!!!hahahaah!"))));
     }
 
     @GetMapping(ItemConstants.LOAD_ALL_ITEMS_V1)

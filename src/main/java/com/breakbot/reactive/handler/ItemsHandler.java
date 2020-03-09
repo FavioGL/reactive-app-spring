@@ -52,4 +52,11 @@ public class ItemsHandler {
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(deletedItem, Void.class);
 
     }
+
+    public Mono<ServerResponse> getAllItemsError(ServerRequest serverRequest){
+        throw new RuntimeException("Runtime functional excetion ocurred");
+
+    }
+
+
 }

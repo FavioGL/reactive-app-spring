@@ -7,5 +7,7 @@ public class ItemConstants {
     public static final String LOAD_ONE_ITEM_V1 = "/v1/item";
     public static final String FUN_LOAD_ONE_ITEM_V1 = "/v1/fun/item";
     public static final String UPDATE_ONE_ITEM_V1 = "/v1/item";
+    public static final String RUNTIME_EXCEPTION = "/v1/runtimeException";
+
 
 }

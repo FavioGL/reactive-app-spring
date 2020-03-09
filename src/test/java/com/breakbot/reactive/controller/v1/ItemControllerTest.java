@@ -122,4 +122,9 @@ public class ItemControllerTest {
 
     }
 
+    @Test
+    public void runttimeException(){
+        webTestClient.get().uri(ItemConstants.RUNTIME_EXCEPTION).exchange().expectStatus().is5xxServerError();
+    }
+
 }
