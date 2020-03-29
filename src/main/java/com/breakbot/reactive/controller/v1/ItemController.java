@@ -49,7 +49,7 @@ public class ItemController {
     @GetMapping(ItemConstants.RUNTIME_EXCEPTION)
     public Flux<Item> getError(){
         return itemReactorRepository.findAll()
-                .concatWith(Mono.error((new RuntimeException("this is an expcetion!!!!hahahaah!"))));
+                .concatWith(Mono.error((new RuntimeException("this is an exception!!!!hahahaah!"))));
     }
 
     @GetMapping(ItemConstants.LOAD_ALL_ITEMS_V1)
